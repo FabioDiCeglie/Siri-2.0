@@ -50,17 +50,18 @@ export default function Home() {
       </header>
 
       {/* Form */}
-      <form action='flex flex-col bg-black'>
+      <form className='flex flex-col bg-black'>
         <div className='flex-1 bg-gradient-to-b from-purple-500 to-black'>
           <Messages />
         </div>
 
-        <input type='file' hidden ref={fileRef} />
+        {/* Hidden fields */}
+        <input type='file' name='audio' hidden ref={fileRef} />
         <button type='submit' hidden ref={submitButtonRef} />
 
         <div className='fixed bottom-0 w-full overflow-hidden bg-black rounded-t-3xl'>
           {/* Recorder */}
-          <Recorder />
+          <Recorder uploadAudio={uploadAudio} />
 
           {/* Voice Synthesiser - output of the Assistance voice */}
           <div></div>
