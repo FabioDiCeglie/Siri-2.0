@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import activeAssistantIcon from '@/img/active.gif';
-import noActiveAssistantIcon from '@/img/notactive.png';
+import notActiveAssistantIcon from '@/img/notactive.png';
 import { useEffect, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { mimeType } from '@/utils/helpers';
@@ -72,11 +72,23 @@ const Recorder = ({ uploadAudio }: RecorderProps) => {
       {pending && (
         <Image
           src={activeAssistantIcon}
-          alt='Assistant Icon'
+          alt='recording'
           width={350}
           height={350}
           priority
-          className='grayscale'
+          className='assistant grayscale'
+        />
+      )}
+
+      {microphonePermission && recordingStatus === 'inactive' && !pending && (
+        <Image
+          src={notActiveAssistantIcon}
+          alt='not recording'
+          width={350}
+          height={350}
+          onClick={startRecording}
+          priority
+          className='assistant cursor-pointer hover:scale-110 duration-150 transition-all ease-in-out'
         />
       )}
     </div>
