@@ -16,7 +16,7 @@ const Recorder = ({ uploadAudio }: RecorderProps) => {
     useState<boolean>(false);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [recordingStatus, setRecordingStatus] = useState<string>('inactive');
-  const [audioChunk, setAudioChunk] = useState<Blob[] | []>([]);
+  const [audioChunks, setAudioChunks] = useState<Blob[] | []>([]);
 
   const mediaRecorder = useRef<MediaRecorder | null>(null);
 
@@ -61,7 +61,19 @@ const Recorder = ({ uploadAudio }: RecorderProps) => {
 
       localAudioChunks.push(event.data);
     };
-    setAudioChunk(localAudioChunks);
+    setAudioChunks(localAudioChunks);
+  };
+
+  const stopRecording = async () => {
+    if (mediaRecorder.current === null || pending) return;
+
+    setRecordingStatus('inactive');
+    mediaRecorder.current.stop();
+    mediaRecorder.current.onstop = () => {
+      const audioBlob = new Blob(audioChunks, { type: mimeType });
+      uploadAudio(audioBlob);
+      setAudioChunks([]);
+    };
   };
 
   return (
@@ -72,7 +84,7 @@ const Recorder = ({ uploadAudio }: RecorderProps) => {
       {pending && (
         <Image
           src={activeAssistantIcon}
-          alt='recording'
+          alt='Recording'
           width={350}
           height={350}
           priority
@@ -83,10 +95,22 @@ const Recorder = ({ uploadAudio }: RecorderProps) => {
       {microphonePermission && recordingStatus === 'inactive' && !pending && (
         <Image
           src={notActiveAssistantIcon}
-          alt='not recording'
+          alt='Not recording'
           width={350}
           height={350}
           onClick={startRecording}
+          priority
+          className='assistant cursor-pointer hover:scale-110 duration-150 transition-all ease-in-out'
+        />
+      )}
+
+      {recordingStatus === 'recording' && (
+        <Image
+          src={activeAssistantIcon}
+          alt='Recording'
+          width={350}
+          height={350}
+          onClick={stopRecording}
           priority
           className='assistant cursor-pointer hover:scale-110 duration-150 transition-all ease-in-out'
         />
