@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import activeAssistantIcon from '@/img/active.gif';
-import notActiveAssistantIcon from '@/img/notactive.png';
+import activeAssistantIcon from '@/public/img/active.gif';
+import notActiveAssistantIcon from '@/public/img/notactive.png';
 import { useEffect, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { getMicrophonePermission, mimeType } from '@/utils/helpers';
