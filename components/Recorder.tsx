@@ -81,6 +81,8 @@ const Recorder = ({ uploadAudio }: RecorderProps) => {
       {!microphonePermission && (
         <button onClick={getMicrophonePermission}>Get Microphone</button>
       )}
+
+      {/* Submit action form is pending */}
       {pending && (
         <Image
           src={activeAssistantIcon}
@@ -92,6 +94,7 @@ const Recorder = ({ uploadAudio }: RecorderProps) => {
         />
       )}
 
+      {/* First recording state */}
       {microphonePermission && recordingStatus === 'inactive' && !pending && (
         <Image
           src={notActiveAssistantIcon}
@@ -104,6 +107,7 @@ const Recorder = ({ uploadAudio }: RecorderProps) => {
         />
       )}
 
+      {/* Recording state */}
       {recordingStatus === 'recording' && (
         <Image
           src={activeAssistantIcon}
