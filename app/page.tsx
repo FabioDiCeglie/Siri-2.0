@@ -5,6 +5,7 @@ import { SettingsIcon } from 'lucide-react';
 import Messages from '@/components/Messages';
 import Recorder from '@/components/Recorder';
 import { useRef } from 'react';
+import { mimeType } from '@/utils/helpers';
 
 export default function Home() {
   const fileRef = useRef<HTMLInputElement | null>(null);
@@ -12,7 +13,7 @@ export default function Home() {
 
   const uploadAudio = (blob: Blob) => {
     const url = URL.createObjectURL(blob);
-    const file = new File([blob], 'audio.webm', { type: blob.type });
+    const file = new File([blob], mimeType, { type: blob.type });
 
     // set the file as the value of the hidden file input field
     if (fileRef.current) {
