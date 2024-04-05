@@ -5,11 +5,14 @@ import { SettingsIcon } from 'lucide-react';
 import Messages from '@/components/Messages';
 import Recorder from '@/components/Recorder';
 import { useRef } from 'react';
-import { mimeType } from '@/utils/helpers';
+import { initialState, mimeType } from '@/utils/helpers';
+import { useFormState } from 'react-dom';
+import { transcript } from '@/actions/transcript';
 
 export default function Home() {
   const fileRef = useRef<HTMLInputElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
+  const [state, formAction] = useFormState(transcript, initialState);
 
   const uploadAudio = (blob: Blob) => {
     const file = new File([blob], 'audio.webm' , { type: mimeType });
@@ -50,7 +53,7 @@ export default function Home() {
       </header>
 
       {/* Form */}
-      <form className='flex flex-col bg-black'>
+      <form action={formAction} className='flex flex-col bg-black'>
         <div className='flex-1 bg-gradient-to-b from-purple-500 to-black'>
           <Messages />
         </div>
