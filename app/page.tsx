@@ -13,7 +13,7 @@ export default function Home() {
 
   const uploadAudio = (blob: Blob) => {
     const url = URL.createObjectURL(blob);
-    const file = new File([blob], mimeType, { type: blob.type });
+    const file = new File([blob], 'audio.webm' , { type: mimeType });
 
     // set the file as the value of the hidden file input field
     if (fileRef.current) {
