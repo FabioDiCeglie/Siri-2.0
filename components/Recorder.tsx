@@ -5,7 +5,7 @@ import activeAssistantIcon from '@/img/active.gif';
 import notActiveAssistantIcon from '@/img/notactive.png';
 import { useEffect, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
-import { mimeType } from '@/utils/helpers';
+import { getMicrophonePermission, mimeType } from '@/utils/helpers';
 
 type RecorderProps = {
   uploadAudio: (blob: Blob) => void;
@@ -23,26 +23,8 @@ const Recorder = ({ uploadAudio }: RecorderProps) => {
   const { pending } = useFormStatus();
 
   useEffect(() => {
-    getMicrophonePermission();
+    getMicrophonePermission(setMicrophonePermission, setStream);
   }, []);
-
-  const getMicrophonePermission = async () => {
-    if ('MediaRecorder' in window) {
-      try {
-        const streamData = await navigator.mediaDevices.getUserMedia({
-          audio: true,
-          video: false,
-        });
-
-        setMicrophonePermission(true);
-        setStream(streamData);
-      } catch (error: any) {
-        alert(error.message);
-      }
-    } else {
-      alert('The MediaRecorder API is not supported in your browser.');
-    }
-  };
 
   const startRecording = async () => {
     if (stream === null || pending || mediaRecorder === null) return;
@@ -79,7 +61,7 @@ const Recorder = ({ uploadAudio }: RecorderProps) => {
   return (
     <div className='flex items-center justify-center text-white'>
       {!microphonePermission && (
-        <button onClick={getMicrophonePermission}>Get Microphone</button>
+        <button onClick={() => getMicrophonePermission(setMicrophonePermission, setStream)}>Get Microphone</button>
       )}
 
       {/* Submit action form is pending */}
