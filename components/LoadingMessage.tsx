@@ -9,8 +9,8 @@ const LoadingMessage = () => {
   
   return (
     pending && (
-      <div className='message ml-auto'>
-        <BeatLoader />
+      <div className='message ml-auto text-white'>
+        <BeatLoader color='white' />
       </div>
     )
   );
