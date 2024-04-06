@@ -82,7 +82,9 @@ export default function Home() {
           <Recorder uploadAudio={uploadAudio} />
 
           {/* Voice Synthesiser - output of the Assistance voice */}
-          <div></div>
+          <div>
+            
+          </div>
         </div>
       </form>
     </main>

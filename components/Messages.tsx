@@ -1,5 +1,6 @@
 import { Message } from '@/utils/types';
 import { ChevronDownCircleIcon } from 'lucide-react';
+import LoadingMessage from './LoadingMessage';
 
 type MessagesProps = {
   messages: Message[];
@@ -12,6 +13,8 @@ const Messages = ({ messages }: MessagesProps) => {
         messages.length > 0 ? 'pb-96' : 'pb-52'
       }`}
     >
+      <LoadingMessage />
+      
       {!messages.length && (
         <div className='flex flex-col space-y-10 flex-1 items-center justify-end'>
           <p className='text-gray-500 animate-pulse'>Start a conversation</p>
