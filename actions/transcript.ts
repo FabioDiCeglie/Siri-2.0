@@ -54,7 +54,7 @@ export const transcript = async (prevState: any, formData: FormData) => {
   const messages = [
     {
       role: 'system',
-      content: '',
+      content: 'You are a helpful assistant. You will answer questions and reply I cannot answer that if you dont know the answer.',
     },
     {
       role: 'user',
