@@ -1,21 +1,27 @@
 'use server';
 
+import {
+  AzureKeyCredential,
+  ChatRequestMessage,
+  OpenAIClient
+} from '@azure/openai'
+
 // add azure open ai here
 export const transcript = async (prevState: any, formData: FormData) => {
 
-// TODO: check here if a process env is empty string to stop it
-  if (
-    process.env.AZURE_API_KEY === undefined ||
-    process.env.AZURE_ENDPOINT === undefined ||
-    process.env.AZURE_DEPLOYMENT_NAME === undefined  ||
-    process.env.AZURE_DEPLOYMENT_COMPLETIONS_NAME === undefined 
-  ) {
-    console.error('Azure credentials not set');
-    return {
+if (
+  process.env.AZURE_API_KEY === undefined || process.env.AZURE_API_KEY === '' ||
+  process.env.AZURE_ENDPOINT === undefined || process.env.AZURE_ENDPOINT === '' ||
+  process.env.AZURE_DEPLOYMENT_NAME === undefined || process.env.AZURE_DEPLOYMENT_NAME === '' ||
+  process.env.AZURE_DEPLOYMENT_COMPLETIONS_NAME === undefined || process.env.AZURE_DEPLOYMENT_COMPLETIONS_NAME === ''
+) {
+  console.error('Azure credentials not set');
+  return {
       sender: '',
       response: 'Azure credentials not set',
-    };
-  }
+  };
+}
+
 
   const file = formData.get('audio') as File;
 
