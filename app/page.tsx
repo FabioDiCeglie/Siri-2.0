@@ -9,12 +9,14 @@ import { initialState, mimeType } from '@/utils/helpers';
 import { useFormState } from 'react-dom';
 import { transcript } from '@/actions/transcript';
 import { Message } from '@/utils/types';
+import VoiceSynthesizer from '@/components/VoiceSynthesizer';
 
 export default function Home() {
   const fileRef = useRef<HTMLInputElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
   const [state, formAction] = useFormState(transcript, initialState);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [displaySettings, setDisplaySettings] = useState(false);
 
   useEffect(() => {
     if (state.response && state.sender) {
@@ -64,13 +66,14 @@ export default function Home() {
           className='p-2 m-2 rounded-full cursor-pointer bg-purple-600
           text-black transition-all ease-in-out duration-150 hover:bg-purple-700 
           hover:text-white'
+          onClick={() => setDisplaySettings(!displaySettings)}
         />
       </header>
 
       {/* Form */}
       <form action={formAction} className='flex flex-col bg-black'>
         <div className='flex-1 bg-gradient-to-b from-purple-500 to-black'>
-          <Messages messages={messages}/>
+          <Messages messages={messages} />
         </div>
 
         {/* Hidden fields */}
@@ -83,7 +86,7 @@ export default function Home() {
 
           {/* Voice Synthesiser - output of the Assistance voice */}
           <div>
-            
+            <VoiceSynthesizer state={state} displaySettings={displaySettings} />
           </div>
         </div>
       </form>

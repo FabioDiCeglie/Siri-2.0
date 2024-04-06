@@ -3,3 +3,8 @@ export type Message = {
     response: string;
     id: string;
 }
+
+export type State = {
+    sender: string;
+    response: string | null | undefined;
+}
