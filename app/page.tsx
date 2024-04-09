@@ -74,6 +74,7 @@ export default function Home() {
         </header>
         
       </div>
+      
 
       {/* Form */}
       <form action={formAction} className='flex flex-col bg-black'>

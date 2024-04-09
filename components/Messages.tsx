@@ -25,7 +25,7 @@ const Messages = ({ messages }: MessagesProps) => {
         </div>
       )}
 
-      <div className='max-w-3xl mx-auto'>
+      <div className='max-w-5xl mx-auto'>
         <div className='p-5 space-y-5'>
           {messages.map((message) => (
             <div key={message.id} className='space-y-5'>
