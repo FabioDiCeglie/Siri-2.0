@@ -1,7 +1,7 @@
 'use client';
 
 import { State } from '@/utils/types';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 type VoiceSynthesizerProps = {
   state: State;
@@ -13,6 +13,7 @@ const VoiceSynthesizer = ({
   displaySettings,
 }: VoiceSynthesizerProps) => {
 
+  const [synth, setSynth] = useState<SpeechSynthesis | null>(null);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [pitch, setPitch] = useState(1);
   const [rate, setRate] = useState(1);
@@ -39,6 +40,27 @@ const VoiceSynthesizer = ({
     }
   };
 
+  useEffect(() => {
+    setSynth(window.speechSynthesis)
+  }, [])
+
+  useEffect(() => {
+    if(!state.response || !synth) return;
+
+    const wordsToSay = new SpeechSynthesisUtterance(state.response);
+
+    wordsToSay.voice = voice;
+    wordsToSay.pitch = pitch;
+    wordsToSay.rate = rate;
+    wordsToSay.volume = volume;
+
+    synth.speak(wordsToSay);
+
+    return () => {
+      synth.cancel();
+    };
+  }, [state])
+  
   return (
     <div className='flex flex-col items-center justify-center text-white'>
       {displaySettings && (
