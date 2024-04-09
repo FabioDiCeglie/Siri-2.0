@@ -4,20 +4,19 @@ import LoadingMessage from './LoadingMessage';
 
 type MessagesProps = {
   messages: Message[];
-  displaySettings: boolean;
 };
 
-const Messages = ({ messages, displaySettings }: MessagesProps) => {
+const Messages = ({ messages }: MessagesProps) => {
   return (
     <div
       className={`flex flex-col min-h-screen p-5 pt-20 ${
-        messages.length > 0 ? 'pb-96' : 'pb-52'
+        messages.length > 0 ? 'pb-96' : 'pb-32'
       }`}
     >
       <LoadingMessage />
       
       {!messages.length && (
-        <div className={`${displaySettings ? 'flex' : 'flex-1'} flex flex-col space-y-10 items-center justify-end`}>
+        <div className={`flex flex-col space-y-10 items-center justify-end`}>
           <p className='text-gray-500 animate-pulse'>Start a conversation</p>
           <ChevronDownCircleIcon
             size={64}

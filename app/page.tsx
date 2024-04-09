@@ -73,7 +73,7 @@ export default function Home() {
       {/* Form */}
       <form action={formAction} className='flex flex-col bg-black'>
         <div className='flex-1 bg-gradient-to-b from-purple-500 to-black'>
-          <Messages messages={messages} displaySettings={displaySettings} />
+          <Messages messages={messages} />
         </div>
 
         {/* Hidden fields */}
