@@ -59,7 +59,7 @@ const VoiceSynthesizer = ({
     return () => {
       synth.cancel();
     };
-  }, [state])
+  }, [state, synth, voice, pitch, rate, volume])
   
   return (
     <div className='flex flex-col items-center justify-center text-white'>
