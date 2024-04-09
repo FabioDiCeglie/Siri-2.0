@@ -33,6 +33,17 @@ This project is a Next.js 14 with TypeScript application that leverages Server A
     - Create accounts for Azure Whisper AI and Azure OpenAI if you haven't already.
     - Obtain the necessary API keys and configure them in the project.
     - Follow Azure documentation for guidance on how to set up and obtain API keys.
+    - Create a .env.local file in the project directory.
+    - Add the following lines to the .env file:
+
+    ```
+    AZURE_API_KEY='your_azure_api_key'
+    AZURE_ENDPOINT='your_azure_endpoint'
+    AZURE_DEPLOYMENT_NAME='your_azure_deployment_name'
+    AZURE_DEPLOYMENT_COMPLETIONS_NAME='your_azure_deployment_completions_name'
+    ```
+
+    Replace 'your_azure_api_key', 'your_azure_endpoint', 'your_azure_deployment_name', and 'your_azure_deployment_completions_name' with the corresponding values provided by Azure.
 
 5. Start the development server:
 
