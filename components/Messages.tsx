@@ -9,7 +9,7 @@ type MessagesProps = {
 const Messages = ({ messages }: MessagesProps) => {
   return (
     <div
-      className={`flex flex-col min-h-screen p-5 pt-20 ${
+      className={`flex flex-col min-h-screen p-5 pt-36 max-w-5xl mx-auto ${
         messages.length > 0 ? 'pb-96' : 'pb-32'
       }`}
     >
