@@ -14,9 +14,9 @@ const Messages = ({ messages }: MessagesProps) => {
       }`}
     >
       <LoadingMessage />
-      
+
       {!messages.length && (
-        <div className={`flex flex-col space-y-10 items-center justify-end`}>
+        <div className={`flex flex-1 flex-col space-y-10 items-center justify-end`}>
           <p className='text-gray-500 animate-pulse'>Start a conversation</p>
           <ChevronDownCircleIcon
             size={64}
@@ -25,25 +25,28 @@ const Messages = ({ messages }: MessagesProps) => {
         </div>
       )}
 
-      <div className='p-5 space-y-5'>
-        {messages.map((message) => (
-          <div key={message.id} className='space-y-5'>
-            {/* receiver */}
-            <div className='pr-48'>
-              <p className='message bg-gray-800 rounded-bl-none'>
-                {message.response}
-              </p>
-            </div>
+      <div className='max-w-3xl mx-auto'>
+        <div className='p-5 space-y-5'>
+          {messages.map((message) => (
+            <div key={message.id} className='space-y-5'>
+              {/* receiver */}
+              <div className='pr-48'>
+                <p className='message bg-gray-800 rounded-bl-none'>
+                  {message.response}
+                </p>
+              </div>
 
-            {/* sender */}
-            <div className='pl-48'>
-              <p className='message text-left ml-auto rounded-br-none'>
-                {message.sender}
-              </p>
+              {/* sender */}
+              <div className='pl-48'>
+                <p className='message text-left ml-auto rounded-br-none'>
+                  {message.sender}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+      
     </div>
   );
 };
