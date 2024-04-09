@@ -72,7 +72,6 @@ export default function Home() {
             onClick={() => setDisplaySettings(!displaySettings)}
           />
         </header>
-        
       </div>
       
 
