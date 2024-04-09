@@ -61,7 +61,9 @@ const Recorder = ({ uploadAudio }: RecorderProps) => {
   return (
     <div className='flex items-center justify-center text-white'>
       {!microphonePermission && (
-        <button onClick={() => getMicrophonePermission(setMicrophonePermission, setStream)}>Get Microphone</button>
+        <button 
+        className='pb-5'
+        onClick={() => getMicrophonePermission(setMicrophonePermission, setStream)}>Get Microphone</button>
       )}
 
       {/* Submit action form is pending */}
